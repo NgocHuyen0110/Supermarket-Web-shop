@@ -1,0 +1,82 @@
+﻿@page
+@model RobertHejinWebApp.Pages.TrackAndViewOrdersModel
+@{
+}
+<h6>Home Delivery Orders</h6>
+@if (@Model.HomeDeliveryOrders.Count == 0)
+{
+    <label>You have not had any order with home delivery yet!</label>
+}
+else
+{
+    <div class="row row-cols-2 g-3">
+    @foreach (var o in Model.HomeDeliveryOrders)
+    {
+        <div class ="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@o.Id</h5>
+                       
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">To: @o.User.FirstName @o.User.LastName</li>
+                           
+                <li class="list-group-item" >Email: @o.User.Account.Email, Phone: 0 @o.User.PhoneNr</li>
+                <li class="list-group-item">Order Date: @o.OrderDate, Status: @o.OrderStatus</li>
+                <li class="list-group-item" >Delivery Date: @o.DeliverOption.DeliveryDate, Delivery time: @o.DeliverOption.TimeSlot</li>
+                <li class="list-group-item" >Delivery to: @o.DeliverOption.Address</li>
+                 <li class="list-group-item">Total: @o.TotalPrice </li>
+            </ul>
+                        
+            <div class="card-body">
+                        @foreach (var c in o.OrderItems)
+                        {
+                            <div>
+                                <label>Item: @c.Item.ItemName, Quantity: @c.Quantity, Price: @c.Item.Price , Unit: @c.Item.Unit </label>
+                            </div>
+                        }
+            </div>
+                </div>
+    </div>
+    }
+    </div>
+}
+<h6>Pick Up Delivery Orders</h6>
+@if (@Model.PickUpOrders.Count == 0)
+{
+    <label>You have not had any order with pick up delivery yet!</label>
+}
+else
+{
+    <div class="row row-cols-2 g-3">
+        @foreach (var o in Model.PickUpOrders)
+        {
+            <div class ="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@o.Id</h5>
+                       
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">To: @o.User.FirstName @o.User.LastName</li>
+                           
+                        <li class="list-group-item" >Email: @o.User.Account.Email, Phone: 0 @o.User.PhoneNr</li>
+                        <li class="list-group-item">Order Date: @o.OrderDate, Status: @o.OrderStatus</li>
+                        <li class="list-group-item" >Pick up Date: @o.DeliverOption.DeliveryDate, Pick up time: @o.DeliverOption.TimeSlot</li>
+                        <li class="list-group-item" >Pick up Location: @o.DeliverOption.Address</li>
+                        <li class="list-group-item">Total: @o.TotalPrice </li>
+                    </ul>
+                        
+                    <div class="card-body">
+                        @foreach (var c in o.OrderItems)
+                        {
+                            <div>
+                                <label>Item: @c.Item.ItemName, Quantity: @c.Quantity, Price: @c.Item.Price , Unit: @c.Item.Unit </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

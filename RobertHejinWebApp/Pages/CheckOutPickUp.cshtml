@@ -1,0 +1,81 @@
+﻿@page
+@model RobertHejinWebApp.Pages.CheckOutPickUpModel
+@{
+}
+
+    <div class="card" style="width: 50%">
+        <div class="card-body mx-4">
+            <div class="container">
+                <p class="my-5 mx-5" style="font-size: 30px;">Customer information</p>
+                <div class="row">
+                    <ul class="list-unstyled">
+                        <li class="text-black"> @Model.UserLogin.FirstName @Model.UserLogin.LastName</li>
+                        <li class="text-black mt-1">Address: @Model.UserLogin.Address</li>
+                        @*<label asp-for="DeliveryOption.Address" class="form-label"> Address: @Model.UserLogin.Address</label>*@
+                        <li class="text-black mt-1">Phone Number: 0 @Model.UserLogin.PhoneNr</li>
+                        <li class="text-black mt-1">Email:@Model.UserLogin.Account.Email</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col mb-4">
+            <div id="pickUpDelivery" style="width: 50%">
+                <h7> Pick Up point Information</h7>
+                
+                <form method="post">
+                    @foreach (var p in Model.Addresses)
+                    {
+
+                        <div>
+                            <input type="submit" asp-for="PickUpAddress.Address" value="@p.Address" class="btn btn-secondary" asp-page-handler="Address"/>
+
+                        </div>
+
+                    }
+                </form>
+            </div>
+
+        </div>
+   
+    <form method="post">    
+   
+        <div class="col mb-4" float-right>
+            <div class="table-responsive-order">
+                <div>
+                    <lable> Pick Up Point: @Model.PickUpAddress.Address</lable>
+                </div>
+                <div>
+                    <lable class="form-label"> DeliveryDate: @Model.DeliveryDate.ToShortDateString()</lable>
+
+                </div>
+                <select class="time-select" asp-for="TimeSlot.Time" style="width: 30%">
+                    @foreach (var t in Model.PickUpTimeSlots)
+                    {
+
+                        <option value="@t.Value">@t.Value</option>
+
+                    }
+                </select>
+                <input type="hidden" asp-for="DeliveryDate" value="@Model.DeliveryDate.ToShortDateString()">
+                <input type="hidden" asp-for="PickUpAddress.Address" value="@Model.PickUpAddress.Address">
+               
+            </div>
+        
+            <div>
+
+                <button type="submit" asp-page-handler="PlaceOrder" class="btn btn-primary  mb-4">Place Order</button>
+            </div>
+        
+        </div>
+    </form>
+    </div>
+    
+
+   
+    
+    
+
+

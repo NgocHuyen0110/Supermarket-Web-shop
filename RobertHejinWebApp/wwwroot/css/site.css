@@ -1,0 +1,70 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+h6 {
+    color: red;
+}
+
+.card {
+    border: 1px solid;
+}
+
+#infor {
+    height: 250px;
+    width: 50%;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+}
+
+.table-responsive-order {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+}
+
+h5 {
+    font-weight: bold;
+}
+/*
+.time {
+    width: 30px;
+}
+*/
+.orderForm {
+    margin-top: 20px;
+    margin: auto;
+    width: 80%;
+}
+
+#homedelivery {
+    background-color: darkgray;
+}
+
+
+.time-select {
+    position: relative;
+    font-family: Arial;
+}
+
+#timeslot {
+    text-align: center;
+}
+
+.checkout {
+    margin: auto;
+}

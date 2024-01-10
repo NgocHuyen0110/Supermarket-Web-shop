@@ -1,0 +1,74 @@
+﻿@page
+@using BusinessLogic.ObjectClasses
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Runtime.CompilerServices
+@model RobertHejinWebApp.Pages.CheckOutHomeDeliveryModel
+@{
+}
+
+<form method="post">
+    
+    <div class="checkout">
+    <div class="card" style="width: 50%">
+        <div class="card-body mx-4">
+            <div class="container">
+                <p class="my-5 mx-5" style="font-size: 30px;">Shipping information</p>
+                <div class="row">
+                    <ul class="list-unstyled">
+                        <li class="text-black"> @Model.UserLogin.FirstName @Model.UserLogin.LastName</li>
+                        <li class="text-black mt-1">Address: @Model.UserLogin.Address</li>
+                        @*<label asp-for="DeliveryOption.Address" class="form-label"> Address: @Model.UserLogin.Address</label>*@
+                        <li class="text-black mt-1">Phone Number: 0 @Model.UserLogin.PhoneNr</li>
+                        <li class="text-black mt-1">Email:@Model.UserLogin.Account.Email</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="homedelivery" style="width: 50%">
+        <h7> Delivery Information</h7>
+
+        <div>
+            <label class="form-label"> DeliveryDate: @Model.DeliveryOption.DeliveryDate.ToShortDateString()</label>
+
+        </div>
+
+        <h7> Please choose a time slot for your home delivery</h7>
+
+        <div>
+
+            <select class="time-select" asp-for="TimeSlot.Time" style="width: 30%">
+                @foreach (var t in Model.HomeDeliveryTimeSlots)
+                {
+
+                    <option value="@t.Value">@t.Value</option>
+
+
+
+                }
+            </select>
+
+        </div>
+
+
+        <div>
+            <label asp-for="DeliveryAddress.Address" class="form-label">Delivery Address:</label>
+            <span asp-validation-for="DeliveryAddress.Address" class="text-danger"></span>
+            <input asp-for="DeliveryAddress.Address" class="form-control" placeholder="Enter Delivery address">
+        </div>
+        <input type="hidden" asp-for="DeliveryDate" value="@Model.DeliveryOption.DeliveryDate.ToShortDateString()">
+        @* <input type="hidden" asp-for="Order.TotalPrice" value="@Model.Cart.TotalPrice">
+    <input type="hidden" asp-for="Order.OrderItems" value="@Model.Cart.CartItems">*@
+
+
+        <br>
+
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-primary mb-4">Place Order</button>
+    </div>
+    </div>
+</form>
+   

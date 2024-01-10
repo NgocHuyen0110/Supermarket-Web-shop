@@ -1,0 +1,39 @@
+﻿@page
+@model RobertHejinWebApp.Pages.LoginModel
+@{
+}
+
+
+<div class="container w-25 mt-5">
+    <form method="post">
+        <!-- input user name-->
+        <div class="mb-4">
+            <label asp-for="Email" class="form-label">Email</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <!-- input password-->
+        <div class="mb-4">
+            <label asp-for="Password" class="form-label">Password</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <input asp-for="Password" type="password"class="form-control" />
+        </div>
+        
+        <p ><h6>@Model.ErrorMessage</h6></p>
+        <!-- login btn -->
+        <button type="submit" class="btn btn-primary  mb-4">Sign in</button>
+       
+      
+        <!-- register btn -->
+        <div class="text-center">
+            <p>You have not become our member yet, then <a asp-area="" asp-page="/Register">Register</a></p>
+
+        </div>
+        
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

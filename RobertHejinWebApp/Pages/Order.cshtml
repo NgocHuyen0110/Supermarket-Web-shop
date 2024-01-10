@@ -1,0 +1,93 @@
+﻿@page
+@model RobertHejinWebApp.Pages.OrderModel
+@{
+}
+<form method="post">
+<div class="orderForm">
+    <div class="row">
+        <div class="col mb-4">
+            <div id="infor">
+                <p> Customer information </p>
+                <p> First name: @Model.UserLogin.FirstName</p>
+                <p>Last Name:@Model.UserLogin.LastName</p>
+                <p>Delivery Address: @Model.UserLogin.Address</p>
+                <p>Phone: 0 @Model.UserLogin.PhoneNr</p>
+            </div>
+        </div>
+        <div class="col mb-4">
+            <div class="table-responsive-order" >
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Unit</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var cartItem in @Model.Cart.CartItems)
+                    {
+                        
+                        <tr>
+                            <td class="align-middle">
+                                <p class="mb-0" style="font-weight: 500;">@cartItem.Item.ItemName</p>
+                            </td>
+                            <td class="align-middle">
+                                <p class="mb-0" style="font-weight: 500;">@cartItem.Item.Unit</p>
+                            </td>
+                            <td class="align-middle">
+                                <p class="mb-0" style="font-weight: 500;">@cartItem.Quantity</p>
+                            </td>
+                            <td class="align-middle">
+                                <p class="mb-0" style="font-weight: 500;">@cartItem.Item.Price</p>
+                            </td>
+                       
+
+                        </tr>
+                       
+                
+                    }
+        
+                    </tbody>
+
+
+                </table>
+                    <a> Total: @Model.Cart.TotalPrice</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        @foreach (var d in Model.Deliveries)
+        {
+            <input type ="radio" asp-for="Delivery" value="@d" > @d<br/>
+        }
+    </div>
+    
+        @*if(delivery == "PickUpDelivery")
+        {
+        <div>
+            <p>Delivery Day: @Model.DeliveryOption.DeliveryDate </p>
+        </div>
+        }
+        else
+        {
+        <div>
+            <p>Delivery Address: @Model.DeliveryOption.DeliveryDate </p>
+        </div>
+        }*@
+    @*<div>
+        <label asp-for="DeliveryOption.DeliveryDate" class="form-label"> DeliveryDate: DeliveryOption.DeliveryDate</label>
+    </div>*@
+
+        @*<h5> Please choose a time slot for your home delivery</h5>
+    <select name="time" id="time">
+        @foreach (var t in @Model.timeSlots)
+        {
+            <option value="@t.Value">@t.Value</option>
+        }
+    </select>*@
+        <button type="submit" class="btn btn-primary  mb-4">Order</button>
+</div>
+</form>

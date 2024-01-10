@@ -1,0 +1,88 @@
+﻿@page
+@model RobertHejinWebApp.Pages.ShoppingCartModel
+@{
+}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col" class="h5">Shopping Bag</th>
+            <th scope="col">Item</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (@Model.Cart.CartItems.Count == 0)
+        {
+            
+            <tr>
+                <td class="align-middle">
+                    <p class="mb-0" style="font-weight: 500;">No items in cart</p>
+                </td>
+            </tr>
+            
+           
+        }
+        else
+        { 
+           
+            
+            @foreach (var cartItem in @Model.Cart.CartItems)
+            {
+                <form method="post">
+                    <tr>
+                        <td class="align-middle">
+                            <p class="mb-0" style="font-weight: 500;"></p>
+                        </td>
+                        <td class="align-middle">
+                            <p class="mb-0" style="font-weight: 500;">@cartItem.Item.ItemName</p>
+                        </td>
+                        <td class="align-middle">
+                            <p class="mb-0" style="font-weight: 500;">@cartItem.Item.Unit</p>
+                        </td>
+                        <td class="align-middle">
+                            <p class="mb-0" style="font-weight: 500;">@cartItem.Quantity</p>
+                        </td>
+                        <td class="align-middle">
+                            <p class="mb-0" style="font-weight: 500;">@cartItem.Item.Price</p>
+                        </td>
+                        <td>
+                            <button type="submit" asp-page-handler="Delete" class="btn btn-primary" value="@cartItem.Item.ItemName" name="ItemName">Delete</button>
+                        </td>
+
+                    </tr>
+                </form>
+                
+            }
+        }
+        </tbody>
+      
+
+    </table>
+    <form method="post">
+        <p ><h6>@Model.Message</h6></p>
+   
+   
+    <div class="bg-light clearfix">
+        
+            
+        @if (@Model.Cart.CartItems.Count != 0)
+        {
+            <div>
+                    <a style="float: right"> Total: @Model.Cart.TotalPrice</a>
+            </div>
+            <div>
+                <a class="btn btn-success" style="float: right" asp-page="/Order" asp-page-handler ="CheckOut">Checkout</a>
+            </div>
+           
+           @* <button type="submit" class="btn btn-success" style="float: right"asp-page-handler ="CheckOut">CheckOut</button>*@
+               @* <input type="submit" class="btn btn-success" asp-page-handler="CheckOut" value="CheckOut"/>*@
+            
+        }
+    </div>
+   
+    </form>
+</div>

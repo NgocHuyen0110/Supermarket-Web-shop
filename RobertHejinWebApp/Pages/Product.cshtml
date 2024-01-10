@@ -1,0 +1,65 @@
+﻿@page
+@using BusinessLogic.ObjectClasses
+@using BusinessLogic.ClassManagers
+@using DataLayer
+@model RobertHejinWebApp.Pages.ProductModel
+@{
+}
+
+<form method="post">
+    @foreach (var c in Model.Categories)
+    {
+        <input type="submit" asp-for="Category.CatergoryItem" value="@c.CatergoryItem" class="btn btn-secondary" asp-page-handler="Category" style="width: 150px" />
+      
+    }
+</form>
+
+<div class="row row-cols-2 g-3">
+        
+    @foreach (var item in @Model.Items)
+    {
+            
+        <form method="post">
+            
+        <div class ="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" value ="@item.ItemName">@item.ItemName</h5>
+                   
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" value="@item.Price">Price: @item.Price</li>
+                       
+                    <li class="list-group-item" value ="@item.Unit">Unit: @item.Unit</li>
+                    <li class="list-group-item" value ="@item.">Subcategory: @item.Subcategory.SubcategoryItem</li>
+                </ul>
+                    
+                <div class="card-body">
+                    <div>
+                        <label asp-for="Quantity" class="form-label">Quantity:</label>
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                        <input asp-for="Quantity" placeholder="Quantity " class="form-control" min="1" max="@item.AmountInStock">
+                        @* <input type="hidden" value="@item.ItemName" name="itemName">*@
+                            <input type="hidden" asp-for="Category.CatergoryItem" value="@item.Subcategory.SubcategoryItem" >
+                        <input type="hidden" asp-for="Category.CatergoryItem" value="@Model.Category.CatergoryItem" />
+                        
+                           
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" value="@item.ItemName" name="itemName" asp-page-handler="AddItem">Add to cart</button>
+            </div>
+        </div>
+        </form>
+            
+       
+        
+    }
+    
+        
+</div>
+
+    
+    
+
+
+
